@@ -1,16 +1,13 @@
 <div class='dad-joke'>
-  {{#if this.isLoading}}
+  {{#if this.dadJokeService.isLoading}}
     <div>
       Loading!
     </div>
-  {{else if this.hasError}}
+  {{else if this.dadJokeService.hasError}}
     <div>
       Oops!
     </div>
   {{else}}
-    <div>
-      <button type='button' {{on 'click' this.getAnotherJoke}}>Get a different one!</button>
-    </div>
     <div>
       {{this.joke}}
     </div>

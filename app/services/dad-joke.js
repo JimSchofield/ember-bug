@@ -12,8 +12,12 @@ export default class DadJokeService extends Service {
   @tracked joke;
   @tracked status = statusEnum.default;
 
-  async fetchDadJoke() {
-    this.status = statusEnum.fetching;
+  async fetchDadJoke(id) {
+    // await Promise.resolve();
+
+    if (this.status !== statusEnum.fetching) {
+      this.status = statusEnum.fetching;
+    }
 
     const response = await fetch('https://icanhazdadjoke.com/', {
       headers: {
@@ -24,8 +28,22 @@ export default class DadJokeService extends Service {
 
     const data = await response.json();
 
-    this.joke = data.joke;
+    if (this.status !== statusEnum.finished) {
+      this.status = statusEnum.finished;
+    }
 
-    this.status = statusEnum.finished;
+    return data.joke;
+  }
+
+  get isWorking() {
+    return this.status === statusEnum.fetching;
+  }
+
+  get isFinished() {
+    return this.status === statusEnum.finished;
+  }
+
+  get hasError() {
+    return this.status === statusEnum.error;
   }
 }
