@@ -1,6 +1,5 @@
 {{page-title "AsyncOops"}}
 
-<GetDadJoke />
-<GetDadJoke />
-<GetDadJoke />
-<GetDadJoke />
+<JokeProvider as |doFetch data error|>
+  <GetDadJoke @doFetch={{doFetch}} @data={{data}} @error={{error}}/>
+</JokeProvider>
