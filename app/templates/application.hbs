@@ -7,7 +7,7 @@
   id="search"
   type="text"
   value={{this.searchText}}
-  {{on "input" this.updateText}}
+  {{on "input" this.debouncedUpdateText}}
 />
 
 <div>

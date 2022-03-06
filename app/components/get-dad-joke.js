@@ -1,22 +1,26 @@
 import Component from '@glimmer/component';
 import FetchHandler from '../util/fetch-handler';
+import { computed } from '@ember/object';
 
 export default class GetDadJokeComponent extends Component {
-  apiHandler = new FetchHandler(
-    `https://icanhazdadjoke.com/search?term=${this.args.searchText}`,
-    {
-      headers: {
-        accept: 'application/json',
-        'User-Agent': 'ember-demonstration',
+  @computed('args.searchText')
+  get apiHandler() {
+    return new FetchHandler(
+      `https://icanhazdadjoke.com/search?term=${this.args.searchText}`,
+      {
+        headers: {
+          accept: 'application/json',
+          'User-Agent': 'ember-demonstration',
+        },
       },
-    },
-    true
-  );
+      true
+    );
+  }
 
   get joke() {
     // for the example, just get the first result :D
     return this.apiHandler.data
-      ? this.apiHandler.data.results[0].joke
+      ? this.apiHandler.data.results[0]?.joke
       : undefined;
   }
 
