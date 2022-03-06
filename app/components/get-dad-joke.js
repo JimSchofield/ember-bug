@@ -1,31 +1,23 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
+import FetchHandler from '../util/fetch-handler';
 
 export default class GetDadJokeComponent extends Component {
-  @tracked joke;
-  @tracked error;
+  apiHandler = new FetchHandler(
+    'https://icanhazdadjoke.com/',
+    {
+      headers: {
+        accept: 'application/json',
+        'User-Agent': 'ember-demonstration',
+      },
+    },
+    true
+  );
 
-  constructor() {
-    super(...arguments);
-
-    this.fetchDadJoke();
+  get joke() {
+    return this.apiHandler.data ? this.apiHandler.data.joke : undefined;
   }
 
-  async fetchDadJoke() {
-    try {
-      const res = await fetch('https://icanhazdadjoke.com/', {
-        headers: {
-          accept: 'application/json',
-          'User-Agent': 'ember-demonstration',
-        },
-      });
-
-      const data = await res.json();
-
-      this.joke = data.joke;
-    } catch (error) {
-      this.error = error;
-    }
+  get error() {
+    return this.apiHandler ? this.apiHandler.error : undefined;
   }
 }
