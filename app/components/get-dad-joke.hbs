@@ -1,15 +1,15 @@
 <div class='dad-joke'>
-  {{#if this.dadJokeService.isLoading}}
+  {{#if this.error}}
     <div>
-      Loading!
+    Oops!
     </div>
-  {{else if this.dadJokeService.hasError}}
+  {{else if this.joke}}
     <div>
-      Oops!
+    {{this.joke}}
     </div>
   {{else}}
     <div>
-      {{this.joke}}
+    Loading!
     </div>
   {{/if}}
 </div>
