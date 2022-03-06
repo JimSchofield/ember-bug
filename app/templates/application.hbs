@@ -1,3 +1,19 @@
 {{page-title "AsyncOops"}}
 
-<GetDadJoke />
+<label for="search">
+  Search Jokes for: 
+</label>
+<input
+  id="search"
+  type="text"
+  value={{this.searchText}}
+  {{on "input" this.updateText}}
+/>
+
+<div>
+  {{#if this.searchText}}
+  Searching for a joke that contains {{this.searchText}}...
+  {{/if}}
+</div>
+
+<GetDadJoke @searchText={{this.searchText}}/>

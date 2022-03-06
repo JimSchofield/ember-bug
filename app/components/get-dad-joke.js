@@ -3,7 +3,7 @@ import FetchHandler from '../util/fetch-handler';
 
 export default class GetDadJokeComponent extends Component {
   apiHandler = new FetchHandler(
-    'https://icanhazdadjoke.com/',
+    `https://icanhazdadjoke.com/search?term=${this.args.searchText}`,
     {
       headers: {
         accept: 'application/json',
@@ -14,7 +14,10 @@ export default class GetDadJokeComponent extends Component {
   );
 
   get joke() {
-    return this.apiHandler.data ? this.apiHandler.data.joke : undefined;
+    // for the example, just get the first result :D
+    return this.apiHandler.data
+      ? this.apiHandler.data.results[0].joke
+      : undefined;
   }
 
   get error() {
