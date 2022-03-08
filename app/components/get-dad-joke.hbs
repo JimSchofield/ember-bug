@@ -1,16 +1,11 @@
 <div class='dad-joke'>
-  <div>Random word: {{this.randomWord.value}}</div>
-  {{#if this.error}}
-    <div>
-    Oops!
-    </div>
-  {{else if this.joke.value}}
-    <div>
-    {{this.joke.value}}
-    </div>
-  {{else}}
-    <div>
-    Loading!
-    </div>
+  {{#if this.getRandomWord.isRunning}}
+    <div>Working!</div>
+  {{/if}}
+  {{#if this.data}}
+    <div>Random word: {{this.data}}</div>
+  {{/if}}
+  {{#if this.getRandomWord.last.error}}
+    <div>Oopsey Wooopsey! {{this.getRandomWord.last.error}}</div>
   {{/if}}
 </div>
