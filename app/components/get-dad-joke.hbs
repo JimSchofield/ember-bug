@@ -3,7 +3,7 @@
     <div>Working!</div>
   {{/if}}
   {{#if this.data}}
-    <div>Random word: {{this.data}}</div>
+    <div>Random word: {{this.word.value}}</div>
   {{/if}}
   {{#if this.getRandomWord.last.error}}
     <div>Oopsey Wooopsey! {{this.getRandomWord.last.error}}</div>
