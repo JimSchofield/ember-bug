@@ -2,7 +2,7 @@
   {{#if this.getRandomWord.isRunning}}
     <div>Working!</div>
   {{/if}}
-  {{#if this.data}}
+  {{#if this.word.value}}
     <div>Random word: {{this.word.value}}</div>
   {{/if}}
   {{#if this.getRandomWord.last.error}}

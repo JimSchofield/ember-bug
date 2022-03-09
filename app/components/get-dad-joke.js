@@ -6,10 +6,12 @@ import { useTask } from 'ember-resources';
 export default class GetDadJokeComponent extends Component {
   @tracked data;
 
-  word = useTask(this, this.getRandomWord);
+  word = useTask(this, this.getRandomWord, () => []);
 
   @task
   *getRandomWord() {
+    yield Promise.resolve();
+
     yield timeout(2000);
 
     const response = yield fetch(
